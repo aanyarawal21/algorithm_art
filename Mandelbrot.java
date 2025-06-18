@@ -1,7 +1,6 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage; 
+import java.awt.image.BufferedImage;
+import javax.swing.*; 
 
 public class Mandelbrot extends JFrame{
 
@@ -46,9 +45,19 @@ public class Mandelbrot extends JFrame{
 
         while(iterations < MAX_ITERATIONS){
             //z^2 + c
-            
+            double newReal = real2 * real2 - imaginary2*imaginary2+ real; 
+            double newImaginary = 2*real2 *imaginary2+imaginary; 
+
+            if(newReal * newReal + newImaginary*newImaginary > 4){
+                break; 
+            }
+
+            real2 = newReal; 
+            imaginary2 = newImaginary; 
+            iterations++; 
         }
 
+        return iterations; 
     }
     
     public static void main(String[] args){
@@ -56,6 +65,7 @@ public class Mandelbrot extends JFrame{
     }
 
     public void paint(Graphics g){
-        g.drawImage(); 
+        g.drawImage(mandelBrotImage, 0, 0, null); 
+        
     }
 }
