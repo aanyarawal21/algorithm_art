@@ -34,8 +34,20 @@ public class Mandelbrot extends JFrame{
                 double imaginary = yMin + (yMax - yMin)*y/HEIGHT; 
 
                 int iterations = calculate(real, imaginary); 
+
+                Color color = getColor(iterations); 
+                mandelbrotImage.setRGB(x, y, color.getRGB()); 
             }
         }
+    }
+
+    private Color getColor(int iterations){
+        if(iterations == MAX_ITERATIONS){
+            return Color.BLACK; 
+        }
+
+        float hue = (float) iterations/MAX_ITERATIONS; 
+        return Color.getHSBColor(hue*0.8f, 1.0f, 1.0f); 
     }
 
     private int calculate(double real, double imaginary){
